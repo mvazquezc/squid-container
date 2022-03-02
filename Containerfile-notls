@@ -1,0 +1,7 @@
+FROM fedora:35
+RUN dnf install -y squid && dnf clean all
+RUN chown -R squid:squid /etc/squid
+USER squid
+EXPOSE 3128
+CMD ["/usr/sbin/squid", "-N", "-d", "1", "-f", "/etc/squid/squid.conf"]
+ENTRYPOINT ["/usr/sbin/squid"]
